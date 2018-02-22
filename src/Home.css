@@ -1,0 +1,13 @@
+.categoriesWrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.categoryTitle {
+    padding: 8px 24px;
+    cursor: pointer;
+}
+
+.categoryTitle.selected {
+    font-weight: 700;
+}
