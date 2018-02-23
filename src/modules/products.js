@@ -27,7 +27,6 @@ const initialState = {
       case FETCH_PRODUCTS_DONE:
         return {
           ...state,
-          //products : filterProductByCategory(action.category, action.products),
           products: action.products,
           isFetchingProducts: !state.isFetchingProducts,
           errorFetchingProducts: false,
@@ -45,7 +44,7 @@ const initialState = {
         category,
       });
   
-      return axios.get(`https://api.gousto.co.uk/products/v2.0/products?includes[]=categories`)
+      return axios.get(`https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i mage_sizes[]=400&period_id=120`)
         .then((res) => {
           dispatch(filterProductByCategory(category, res.data.data));
         })
@@ -57,13 +56,13 @@ const initialState = {
     }
   }
 
- function filterProductByCategory(c, products) {
-   console.log(products);
-    const n = products.filter( p => p.categories[0].title === c );
-    console.log(n);
+ function filterProductByCategory(category, products) {
+  const categoriesFiltered =  products.map(p => p.categories.filter(c => c.id === category));
+  const productsFiltered = products.filter((p, i) => categoriesFiltered[i].length > 0);
+
     return ({
       type: FETCH_PRODUCTS_DONE,
-      products: products,
-      category: c,
+      products: productsFiltered,
+      category,
   });
 };

@@ -2,20 +2,20 @@ import React from 'react';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { fetchCategories } from './modules/categories';
+import { fetchCategoriesAndProducts } from './modules/categories';
 import { fetchProducts } from './modules/products';
 import './Home.css';
 import classNames from 'classnames';
 
   class Home extends React.Component {
 
-    handleOnClick(e, category, id) {
-        this.props.fetchProducts(category);
+    handleOnClick(e, categoryId) {
+        this.props.fetchProducts(categoryId);
     }
 
       componentWillMount() {
         if(this.props.categories.length === 0) {
-            this.props.fetchCategories();
+            this.props.fetchCategoriesAndProducts();
         }
       }
 
@@ -25,14 +25,14 @@ import classNames from 'classnames';
                     <div className="categoriesWrapper">
                     { 
                         this.props.categories.map(c => (
-                            <div 
+                            <div
                                 key={ c.id } 
                                 data-key={ c.id }
                                 className={ classNames({
                                     'categoryTitle': true,
                                     'selected': this.props.selectedCategory === c.id,
                                     }) } 
-                                onClick={ (e) => this.handleOnClick(e, c.title, c.id) } 
+                                onClick={ (e) => this.handleOnClick(e, c.id) } 
                                 selected={this.props.selectedCategory === c.id}>
                                 { c.title }
                             </div>
@@ -52,6 +52,9 @@ import classNames from 'classnames';
   }
 
   const mapStateToProps = (state, ownProps) => ({
+    //id: ownProps.params.id,
+    //filter: ownProps.location.query.filter,
+
     selectedCategory: state.categories.selectedCategory,
     categories: state.categories.categories,
     isFetchingCategories: state.categories.isFetchingCategories,
@@ -62,8 +65,8 @@ import classNames from 'classnames';
   })
   
   const mapDispatchToProps = dispatch => bindActionCreators({
-    fetchCategories,
     fetchProducts,
+    fetchCategoriesAndProducts,
     changePage: () => push('/about-us'),
   }, dispatch)
   

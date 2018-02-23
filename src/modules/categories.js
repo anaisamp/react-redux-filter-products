@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { fetchProducts } from './products';
+
 export const FETCH_CATEGORIES_REQUESTED = 'categories/FETCH_CATEGORIES_REQUESTED';
 export const FETCH_CATEGORIES_ERROR = 'categories/FETCH_CATEGORIES_ERROR';
 export const FETCH_CATEGORIES_DONE = 'categories/FETCH_CATEGORIES_DONE';
@@ -60,3 +62,11 @@ const initialState = {
     }
   }
 
+  export const fetchCategoriesAndProducts = () => {
+    return (dispatch, getState) => {
+      return dispatch(fetchCategories()).then(() => {
+        const fetchedSeletedCategory = getState().categories.selectedCategory;
+        return dispatch(fetchProducts(fetchedSeletedCategory));
+      })
+    }
+  }
