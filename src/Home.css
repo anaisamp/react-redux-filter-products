@@ -1,23 +1,44 @@
 .categoriesWrapper {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 8px;
 }
 
-.categoryTitle, 
-.productTitle {
-    padding: 8px 24px;
+.categoryTitle {
+    padding: 6px 8px 6px 0px;
     cursor: pointer;
+    font-size: 14px;
 }
 
-.categoryTitle.selected,
+.categoryTitle.selected {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.productList {
+    margin-top: 8px;
+}
+
+.productWrapper {
+    padding: 3px 8px 3px 0px;
+}
+.productTitle {
+    margin: 0;
+    padding: 3px 0;
+    cursor: pointer;
+    font-size: 12px;
+}
 .productTitle.selected {
     font-weight: 700;
 }
-
+.productDescription {
+    margin: 0;
+    font-size: 12px;
+    font-style: italic;
+}
 .hide {
     display: none;
 }
 .show {
-    padding: 0px 24px;
     display: block;
 }

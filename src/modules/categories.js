@@ -63,7 +63,7 @@ const initialState = {
   export const fetchCategoriesAndProducts = () => {
     return (dispatch, getState) => {
       return dispatch(fetchCategories()).then(() => {
-        const fetchedSeletedCategory = getState().categories[0].id;
+        const fetchedSeletedCategory = getState().categories.categories[0].id;
         return dispatch(fetchProducts(fetchedSeletedCategory));
       })
     }

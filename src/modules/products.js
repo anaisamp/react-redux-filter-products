@@ -7,10 +7,12 @@ export const FETCH_PRODUCT_FILTER = 'products/FETCH_PRODUCT_FILTER';
 
 const initialState = {
     products: [],
+    visibleProducts: [],
     isFetchingProducts: false,
     errorFetchingProducts: false,
     toogleProductDescription: [],
-    selectedCategory: null
+    selectedCategory: null,
+    searchValue: '',
   }
 
   export default (state = initialState, action) => {
@@ -29,13 +31,15 @@ const initialState = {
           }
   
       case FETCH_PRODUCTS_DONE:
+          const { products, category } = action;
         return {
           ...state,
-          products: action.products,
+          products: products,
+          visibleProducts: products,
           isFetchingProducts: !state.isFetchingProducts,
           errorFetchingProducts: false,
-          selectedCategory: action.category,
-          toogleProductDescription: action.products.map(p => {
+          selectedCategory: category,
+          toogleProductDescription: products.map(p => {
             return p.toogleProductDescription || false;
           })
         }
@@ -51,12 +55,17 @@ const initialState = {
           })
         }
         case FETCH_PRODUCT_FILTER:
-        return {
-          ...state,
-          products: state.products.map( (p, i) => {
-            return p.title.contains(action.term) ? state.products.push(p) : null;
-          })
-        }
+          const { searchValue } = action;
+          const searchValueLowercase = searchValue.toLowerCase();
+          const visibleProducts = searchValue 
+              ? state.products.filter((p) => p.title.toLowerCase().includes(searchValueLowercase) || p.description.toLowerCase().includes(searchValueLowercase))
+              : state.products;
+          return { 
+            ...state, 
+            searchValue, 
+            visibleProducts 
+          };
+
       default:
         return state
     }
@@ -101,11 +110,11 @@ export const toogleProductDescriptionVisibility = (index) => {
   }
 };
 
-export const fetchProductsFilter = (term) => {
+export const fetchProductsFilter = (searchValue) => {
   return dispatch => {
     dispatch({
       type: FETCH_PRODUCT_FILTER,
-      term
+      searchValue
     });
   }
 };

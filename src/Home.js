@@ -17,6 +17,10 @@ import classnames from 'classnames';
         this.props.toogleProductDescriptionVisibility(index);
     }
 
+    handleSearch = (searchValue) => {
+        this.props.fetchProductsFilter(searchValue);
+    }
+
     componentWillMount() {
         if(this.props.categories.length === 0) {
             this.props.fetchCategoriesAndProducts();
@@ -43,15 +47,17 @@ import classnames from 'classnames';
                         ))
                     }
                     </div>
-
-                    <div className="productWrapper">
+                    <input type="search" size="45" 
+                        value= { this.props.searchValue }
+                        onInput={ (e) => this.handleSearch(e.target.value) } />
+                    <div className="productList">
                     {
-                        this.props.products.map( (p, i) => (  
-                            <div key={p.id} >
+                        this.props.visibleProducts.map((p, i) => (  
+                            <div key={p.id}  className="productWrapper">
                                 <p onClick={ () => this.handleClickExpandDescription(i)}
                                     className={ `productTitle ${this.props.toogleProductDescription[i] ? 'selected' : ''}`}
                                 >{ p.title }</p>
-                                <p className={ this.props.toogleProductDescription[i] ? 'show' : 'hide'}> 
+                                <p className={  `productDescription ${this.props.toogleProductDescription[i] ? 'show' : 'hide'}`}> 
                                     { p.description } 
                                 </p>
                             </div>
@@ -71,10 +77,12 @@ import classnames from 'classnames';
     isFetchingCategories: state.categories.isFetchingCategories,
     errorFetchingCategories: state.categories.errorFetchingCategories,
     products: state.products.products,
+    visibleProducts: state.products.visibleProducts,
     isFetchingProducts: state.products.isFetchingProducts,
     errorFetchingProducts: state.products.errorFetchingProducts,
     selectedCategory: state.products.selectedCategory,
     toogleProductDescription: state.products.toogleProductDescription,
+    searchValue: state.products.searchValue,
   })
   
   const mapDispatchToProps = dispatch => bindActionCreators({
