@@ -6,7 +6,6 @@ export const FETCH_CATEGORIES_ERROR = 'categories/FETCH_CATEGORIES_ERROR';
 export const FETCH_CATEGORIES_DONE = 'categories/FETCH_CATEGORIES_DONE';
 
 const initialState = {
-    selectedCategory: null,
     categories: [],
     isFetchingCategories: false,
     errorFetchingCategories: false,
@@ -30,7 +29,6 @@ const initialState = {
       case FETCH_CATEGORIES_DONE:
         return {
           ...state,
-          selectedCategory: action.categories[0].id,
           categories : action.categories,
           isFetchingCategories: !state.isFetchingCategories,
           errorFetchingCategories: false,
@@ -65,7 +63,7 @@ const initialState = {
   export const fetchCategoriesAndProducts = () => {
     return (dispatch, getState) => {
       return dispatch(fetchCategories()).then(() => {
-        const fetchedSeletedCategory = getState().categories.selectedCategory;
+        const fetchedSeletedCategory = getState().categories[0].id;
         return dispatch(fetchProducts(fetchedSeletedCategory));
       })
     }

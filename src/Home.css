@@ -3,11 +3,21 @@
     flex-wrap: wrap;
 }
 
-.categoryTitle {
+.categoryTitle, 
+.productTitle {
     padding: 8px 24px;
     cursor: pointer;
 }
 
-.categoryTitle.selected {
+.categoryTitle.selected,
+.productTitle.selected {
     font-weight: 700;
+}
+
+.hide {
+    display: none;
+}
+.show {
+    padding: 0px 24px;
+    display: block;
 }
