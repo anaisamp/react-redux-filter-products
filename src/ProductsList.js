@@ -2,11 +2,11 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { fetchCategoriesAndProducts } from './modules/categories';
-import { fetchProducts, toogleProductDescriptionVisibility, fetchProductsFilter } from './modules/products';
-import './Home.css';
+import { fetchCategoriesAndProducts } from './actions/categories';
+import { fetchProducts, toogleProductDescriptionVisibility, fetchProductsFilter } from './actions/products';
+import './ProductsList.css';
 
-  class Home extends React.Component {
+  class ProductsList extends React.Component {
 
     handleClickSelectCategory = (categoryId) => {
         this.props.fetchProducts(categoryId);
@@ -91,4 +91,4 @@ import './Home.css';
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Home)
+  )(ProductsList)
