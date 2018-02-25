@@ -22,23 +22,28 @@
 .productWrapper {
     padding: 3px 8px 3px 0px;
 }
+
 .productTitle {
     margin: 0;
     padding: 3px 0;
     cursor: pointer;
     font-size: 12px;
 }
+
 .productTitle.selected {
     font-weight: 700;
 }
+
 .productDescription {
     margin: 0;
     font-size: 12px;
     font-style: italic;
 }
+
 .hide {
     display: none;
 }
+
 .show {
     display: block;
 }

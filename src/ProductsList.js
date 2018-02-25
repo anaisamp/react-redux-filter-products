@@ -20,7 +20,7 @@ import './ProductsList.css';
         this.props.fetchProductsFilter(searchValue);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if(this.props.categories.length === 0) {
             this.props.fetchCategoriesAndProducts();
         }
@@ -34,13 +34,14 @@ import './ProductsList.css';
                     this.props.categories.map(c => (
                         <div
                             key={ c.id } 
-                            data-key={ c.id }
-                            className={ classnames({
-                                'categoryTitle': true,
-                                'selected': this.props.selectedCategory === c.id,
+                            className={ 
+                                classnames({
+                                    'categoryTitle': true,
+                                    'selected': this.props.selectedCategory === c.id,
                                 }) } 
                             onClick={ () => this.handleClickSelectCategory(c.id) } 
-                            selected={this.props.selectedCategory === c.id}>
+                            selected={this.props.selectedCategory === c.id}
+                        >
                             { c.title }
                         </div>
                     ))
@@ -48,14 +49,16 @@ import './ProductsList.css';
                 </div>
                 <input type="search" size="45" 
                     value= { this.props.searchValue }
-                    onInput={ (e) => this.handleSearch(e.target.value) } />
+                    onInput={ (e) => this.handleSearch(e.target.value) }
+                />
                 <div className="productList">
                 {
                     this.props.visibleProducts.map((p, i) => (  
                         <div key={p.id}  className="productWrapper">
                             <p onClick={ () => this.handleClickExpandDescription(i)}
-                                className={ `productTitle ${this.props.toogleProductDescription[i] ? 'selected' : ''}`}
-                            >{ p.title }</p>
+                                className={ `productTitle ${this.props.toogleProductDescription[i] ? 'selected' : ''}`}>
+                                { p.title }
+                            </p>
                             <p className={  `productDescription ${this.props.toogleProductDescription[i] ? 'show' : 'hide'}`}> 
                                 { p.description } 
                             </p>
@@ -63,8 +66,7 @@ import './ProductsList.css';
                     ))
                 }
                 </div>
-        </div>
-        );
+        </div>);
     }
   }
 
@@ -79,16 +81,16 @@ import './ProductsList.css';
     selectedCategory: state.products.selectedCategory,
     toogleProductDescription: state.products.toogleProductDescription,
     searchValue: state.products.searchValue,
-  })
+  });
   
   const mapDispatchToProps = dispatch => bindActionCreators({
     fetchProducts,
     fetchProductsFilter,
     fetchCategoriesAndProducts,
     toogleProductDescriptionVisibility,
-  }, dispatch)
+  }, dispatch);
   
   export default connect(
     mapStateToProps,
     mapDispatchToProps
-  )(ProductsList)
+  )(ProductsList);

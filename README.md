@@ -6,6 +6,8 @@ This app was created using [`create-react-app`](https://github.com/facebook/crea
 
 Tests were implemented using Jest and Enzyme.
 
+A screenshot of the application is available at "visuals" folder.
+
 ## How to run the app
 
 1. Clone repository
@@ -20,18 +22,18 @@ Tests were implemented using Jest and Enzyme.
 
 `npm run start`
 
+Note: Disable cross-origin restrictions in the browser before running the app.
+
 4. Run tests
 
 `npm run test`
 
 ## Features
 
-- Shows all the available category names in one row (can wrap into multiple lines if screen is not wide enough)
-- Shows a list of product titles under each other
-- Once a category is clicked only products belonging to the clicked category will be shown and clicked category will be bold to indicate it is active
-- An input field should be placed above the list of products and below the categories.
-- The input field should be used as a free text search filter for products. Once input is entered only products which feature the given text in their title or description should be shown . (eg: input is "win", products with title "Red Wine" should be shown)
-- When a product name is clicked it becomes bold and toggles the visibility of the description, ie. when clicked it shows the product description below the product name. When clicked again the description should not be shown. Multiple descriptions can be shown in the same time.
+- Shows all the available category titles from categories endpoint.
+- Shows a list of product titles under each category, gathered from products endpoint. Once a category is clicked only products belonging to the clicked category are displayed.
+- A search field is placed above the list of products. It can be used as free text and it allows you to search for products which belongs to the selected category.
+- When a product title is clicked it toggles the visibility of the description. Multiple descriptions can be shown at the same time.
 
 ## Next steps
 

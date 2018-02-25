@@ -5,7 +5,7 @@ export const FETCH_PRODUCTS_DONE = 'products/FETCH_PRODUCTS_DONE';
 export const TOOGLE_PRODUCT_DESCRIPTION = 'products/TOOGLE_PRODUCT_DESCRIPTION';
 export const FETCH_PRODUCT_FILTER = 'products/FETCH_PRODUCT_FILTER';
 
-  export const fetchProducts = (category) => {
+export const fetchProducts = (category) => {
     return dispatch => {
       dispatch({
         type: FETCH_PRODUCTS_REQUESTED,
@@ -22,7 +22,7 @@ export const FETCH_PRODUCT_FILTER = 'products/FETCH_PRODUCT_FILTER';
             });
         })
     }
-  }
+};
 
 export const filterProductByCategory = (category, products) => {
   const categoriesFiltered =  products.map(p => p.categories.filter(c => c.id === category));

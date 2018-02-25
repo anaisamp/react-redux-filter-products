@@ -2,11 +2,9 @@ import {
     filterProductByCategory,
     toogleProductDescriptionVisibility,
     fetchProductsFilter,
-
     TOOGLE_PRODUCT_DESCRIPTION,
     FETCH_PRODUCT_FILTER,
     FETCH_PRODUCTS_DONE
-
  } from './products';
 
 it('creates a FETCH_PRODUCT_FILTER action', () => {

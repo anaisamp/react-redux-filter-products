@@ -41,5 +41,5 @@ describe('Products Reducer', () => {
         }
 
         expect(ProductsReducer(initialState, {index: 0, type: TOOGLE_PRODUCT_DESCRIPTION})).toEqual(newState);
-    })
-})
+    });
+});
